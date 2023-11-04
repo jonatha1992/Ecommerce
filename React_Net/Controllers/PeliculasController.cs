@@ -3,7 +3,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using React_Net;
-using React_Net.DTOs;
 using React_Net.Models;
 
 namespace AspNetCore.Controllers

@@ -2,7 +2,6 @@
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using React_Net.DTOs;
 using React_Net.Models;
 
 namespace React_Net.Controllers

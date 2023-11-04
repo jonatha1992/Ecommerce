@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using React_Net;
 using React_Net.Models;
-using React_Net.DTOs;
 
 namespace AspNetCore.Controllers
 {
@@ -24,7 +23,7 @@ namespace AspNetCore.Controllers
             ComentarioCreacionDTO comentarioCreacionDTO)
         {
             var comentario = mapper.Map<Comentario>(comentarioCreacionDTO);
-            comentario.Pelicula = new Pelicula { Id = peliculaId };
+            comentario.PeliculaId = peliculaId;
             context.Add(comentario);
             await context.SaveChangesAsync();
             return Ok();

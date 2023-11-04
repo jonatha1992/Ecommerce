@@ -25,10 +25,20 @@ namespace React_Net
             configurationBuilder.Properties<string>().HaveMaxLength(150);
         }
 
-        public DbSet<Genero> Generos => Set<Genero>();
+        //public DbSet<Genero> Generos => Set<Genero>();
         public DbSet<Actor> Actores => Set<Actor>();
         public DbSet<Pelicula> Peliculas => Set<Pelicula>();
         public DbSet<Comentario> Comentarios => Set<Comentario>();
         public DbSet<PeliculaActor> PeliculasActores => Set<PeliculaActor>();
+
+        public DbSet<Genero> Generos { get; set; }
+        //public DbSet<Genero> Generos => Set<Genero>();
+        public DbSet<Actor> Actores => Set<Actor>();
+        public DbSet<Pelicula> Peliculas => Set<Pelicula>();
+        public DbSet<Comentario> Comentarios => Set<Comentario>();
+        public DbSet<PeliculaActor> PeliculasActores => Set<PeliculaActor>();
+
+
+
     }
 }
