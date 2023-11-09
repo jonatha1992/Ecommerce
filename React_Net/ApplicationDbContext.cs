@@ -26,17 +26,16 @@ namespace React_Net
         }
 
         //public DbSet<Genero> Generos => Set<Genero>();
-        public DbSet<Actor> Actores => Set<Actor>();
-        public DbSet<Pelicula> Peliculas => Set<Pelicula>();
-        public DbSet<Comentario> Comentarios => Set<Comentario>();
-        public DbSet<PeliculaActor> PeliculasActores => Set<PeliculaActor>();
+        //public DbSet<Actor> Actores => Set<Actor>();
+        //public DbSet<Pelicula> Peliculas => Set<Pelicula>();
+        //public DbSet<Comentario> Comentarios => Set<Comentario>();
+        //public DbSet<Personaje> Personajes => Set<Personaje>();
 
         public DbSet<Genero> Generos { get; set; }
-        //public DbSet<Genero> Generos => Set<Genero>();
-        public DbSet<Actor> Actores => Set<Actor>();
-        public DbSet<Pelicula> Peliculas => Set<Pelicula>();
-        public DbSet<Comentario> Comentarios => Set<Comentario>();
-        public DbSet<PeliculaActor> PeliculasActores => Set<PeliculaActor>();
+        public DbSet<Actor> Actores { get; set; }
+        public DbSet<Pelicula> Peliculas { get; set; }
+        public DbSet<Comentario> Comentarios { get; set; }
+        public DbSet<Personaje> Personajes { get; set; }
 
 
 

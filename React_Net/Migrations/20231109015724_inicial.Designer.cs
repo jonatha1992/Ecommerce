@@ -12,8 +12,8 @@ using React_Net;
 namespace React_Net.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231103085202_actores")]
-    partial class actores
+    [Migration("20231109015724_inicial")]
+    partial class inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -165,18 +165,6 @@ namespace React_Net.Migrations
                         .IsUnique();
 
                     b.ToTable("Generos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 5,
-                            Nombre = "Ciencia Ficción"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Nombre = "Animación"
-                        });
                 });
 
             modelBuilder.Entity("React_Net.Models.Pelicula", b =>
@@ -226,50 +214,37 @@ namespace React_Net.Migrations
                         });
                 });
 
-            modelBuilder.Entity("React_Net.Models.PeliculaActor", b =>
+            modelBuilder.Entity("React_Net.Models.Personaje", b =>
                 {
-                    b.Property<int>("ActorId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PeliculaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Orden")
+                    b.Property<int>("ActorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Personaje")
+                    b.Property<int?>("ActorId1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.HasKey("ActorId", "PeliculaId");
+                    b.Property<int>("Orden")
+                        .HasColumnType("int");
 
-                    b.HasIndex("PeliculaId");
+                    b.Property<int?>("PeliculaId1")
+                        .HasColumnType("int");
 
-                    b.ToTable("PeliculasActores");
+                    b.HasKey("PeliculaId", "ActorId");
 
-                    b.HasData(
-                        new
-                        {
-                            ActorId = 2,
-                            PeliculaId = 3,
-                            Orden = 1,
-                            Personaje = "Nick Fury"
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            PeliculaId = 2,
-                            Orden = 2,
-                            Personaje = "Nick Fury"
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            PeliculaId = 2,
-                            Orden = 1,
-                            Personaje = "Iron Man"
-                        });
+                    b.HasIndex("ActorId");
+
+                    b.HasIndex("ActorId1");
+
+                    b.HasIndex("PeliculaId1");
+
+                    b.ToTable("Personajes");
                 });
 
             modelBuilder.Entity("GeneroPelicula", b =>
@@ -298,19 +273,27 @@ namespace React_Net.Migrations
                     b.Navigation("Pelicula");
                 });
 
-            modelBuilder.Entity("React_Net.Models.PeliculaActor", b =>
+            modelBuilder.Entity("React_Net.Models.Personaje", b =>
                 {
                     b.HasOne("React_Net.Models.Actor", "Actor")
-                        .WithMany("PeliculasActores")
+                        .WithMany()
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("React_Net.Models.Actor", null)
+                        .WithMany("Personajes")
+                        .HasForeignKey("ActorId1");
+
                     b.HasOne("React_Net.Models.Pelicula", "Pelicula")
-                        .WithMany("PeliculasActores")
+                        .WithMany()
                         .HasForeignKey("PeliculaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("React_Net.Models.Pelicula", null)
+                        .WithMany("Personajes")
+                        .HasForeignKey("PeliculaId1");
 
                     b.Navigation("Actor");
 
@@ -319,14 +302,14 @@ namespace React_Net.Migrations
 
             modelBuilder.Entity("React_Net.Models.Actor", b =>
                 {
-                    b.Navigation("PeliculasActores");
+                    b.Navigation("Personajes");
                 });
 
             modelBuilder.Entity("React_Net.Models.Pelicula", b =>
                 {
                     b.Navigation("Comentarios");
 
-                    b.Navigation("PeliculasActores");
+                    b.Navigation("Personajes");
                 });
 #pragma warning restore 612, 618
         }

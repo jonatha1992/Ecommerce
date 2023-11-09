@@ -8,7 +8,7 @@ namespace React_Net.Models
         public int Id { get; set; }
         public string? Contenido { get; set; }
         public bool Recomendar { get; set; }
-        public int PeliculaId { get; set; }
+        //public int PeliculaId { get; set; }
         public Pelicula Pelicula { get; set; } = null!;
     }
 
@@ -22,6 +22,13 @@ namespace React_Net.Models
     {
         public void Configure(EntityTypeBuilder<Comentario> builder)
         {
+            builder.Property<int>("PeliculaId");
+            builder.HasOne(c => c.Pelicula)
+                   .WithMany()
+                   .HasForeignKey("PeliculaId");
+
+            builder.HasKey(c => c.Id);
+
             builder.Property(a => a.Contenido).HasMaxLength(500);
         }
     }

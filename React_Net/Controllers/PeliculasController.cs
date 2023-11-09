@@ -26,7 +26,7 @@ namespace AspNetCore.Controllers
             var pelicula = await context.Peliculas
                 .Include(p => p.Comentarios)
                 .Include(p => p.Generos)
-                .Include(p => p.PeliculasActores.OrderBy(pa => pa.Orden))
+                .Include(p => p.Personajes.OrderBy(pa => pa.Orden))
                     .ThenInclude(pa => pa.Actor)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
@@ -47,11 +47,11 @@ namespace AspNetCore.Controllers
                     pel.Id,
                     pel.Titulo,
                     Generos = pel.Generos.Select(g => g.Nombre).ToList(),
-                    Actores = pel.PeliculasActores.OrderBy(pa => pa.Orden).Select(pa =>
+                    Actores = pel.Personajes.OrderBy(pa => pa.Orden).Select(pa =>
                     new {
                         Id = pa.Actor.Id,
-                        pa.Actor.Nombre,
-                        pa.Personaje
+                        NombreActor= pa.Actor.Nombre,
+                        NombrePersonaje = pa.Nombre
                     }),
                     CantidadComentarios = pel.Comentarios.Count()
                 })
@@ -78,11 +78,11 @@ namespace AspNetCore.Controllers
                 }
             }
 
-            if (pelicula.PeliculasActores is not null)
+            if (pelicula.Personajes is not null)
             {
-                for (int i = 0; i < pelicula.PeliculasActores.Count; i++)
+                for (int i = 0; i < pelicula.Personajes.Count; i++)
                 {
-                    pelicula.PeliculasActores[i].Orden = i + 1;
+                    pelicula.Personajes[i].Orden = i + 1;
                 }
             }
 

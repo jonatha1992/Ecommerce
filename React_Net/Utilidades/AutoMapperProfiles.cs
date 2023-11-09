@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using React_Net.DTOs;
 using React_Net.Models;
 
 namespace IntroduccionAEFCore.Utilidades
@@ -18,7 +17,7 @@ namespace IntroduccionAEFCore.Utilidades
                 dto.MapFrom(campo => campo.Generos.
                 Select(id => new Genero { Id = id })));
 
-            CreateMap<PeliculaActorCreacionDTO, PeliculaActor>();
+            CreateMap<PersonajeCreacionDTO, Personaje>();
         }
     }
 }

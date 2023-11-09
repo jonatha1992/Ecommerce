@@ -10,7 +10,7 @@ namespace React_Net.Models
         public string Nombre { get; set; } = null!;
         public decimal Fortuna { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public List<PeliculaActor> PeliculasActores { get; set; } = new List<PeliculaActor>();
+        public List<Personaje> Personajes { get; set; } = new List<Personaje>();
     }
 
     public class ActorCreacionDTO

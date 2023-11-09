@@ -11,7 +11,7 @@ namespace React_Net.Models
         public DateTime FechaEstreno { get; set; }
         public HashSet<Comentario> Comentarios { get; set; } = new HashSet<Comentario>();
         public List<Genero> Generos { get; set; } = new List<Genero>();
-        public List<PeliculaActor> PeliculasActores { get; set; } = new List<PeliculaActor>();
+        public List<Personaje> Personajes { get; set; } = new List<Personaje>();
     }
 
     public class PeliculaCreacionDTO
@@ -20,8 +20,8 @@ namespace React_Net.Models
         public bool EnCines { get; set; }
         public DateTime FechaEstreno { get; set; }
         public List<int> Generos { get; set; } = new List<int>();
-        public List<PeliculaActorCreacionDTO> PeliculasActores { get; set; }
-                = new List<PeliculaActorCreacionDTO>();
+        public List<PersonajeCreacionDTO> Personajes { get; set; }
+                = new List<PersonajeCreacionDTO>();
     }
 
     public class PeliculaConfig : IEntityTypeConfiguration<Pelicula>
