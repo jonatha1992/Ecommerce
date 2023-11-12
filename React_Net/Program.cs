@@ -15,7 +15,8 @@ builder.Services.AddSwaggerGen();
 
 
 //builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ApplicationDbContext >(opciones => opciones.UseSqlServer("name=DefaultConnection"));
+//builder.Services.AddDbContext<ApplicationDbContext >(opciones => opciones.UseSqlServer("name=DefaultConnectionPC"));
+builder.Services.AddDbContext<ApplicationDbContext >(opciones => opciones.UseSqlServer("name=DefaultConnectionNB"));
 
 builder.Services.AddAutoMapper(typeof(Program));
 
