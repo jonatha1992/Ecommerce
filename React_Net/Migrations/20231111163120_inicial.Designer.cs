@@ -12,7 +12,7 @@ using React_Net;
 namespace React_Net.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231109015724_inicial")]
+    [Migration("20231111163120_inicial")]
     partial class inicial
     {
         /// <inheritdoc />
@@ -38,23 +38,6 @@ namespace React_Net.Migrations
                     b.HasIndex("PeliculasId");
 
                     b.ToTable("GeneroPelicula");
-
-                    b.HasData(
-                        new
-                        {
-                            GenerosId = 5,
-                            PeliculasId = 2
-                        },
-                        new
-                        {
-                            GenerosId = 5,
-                            PeliculasId = 3
-                        },
-                        new
-                        {
-                            GenerosId = 6,
-                            PeliculasId = 4
-                        });
                 });
 
             modelBuilder.Entity("React_Net.Models.Actor", b =>
@@ -79,23 +62,7 @@ namespace React_Net.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actores");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            FechaNacimiento = new DateTime(1948, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Fortuna = 15000m,
-                            Nombre = "Samuel L. Jackson"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FechaNacimiento = new DateTime(1965, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Fortuna = 18000m,
-                            Nombre = "Robert Downey Jr."
-                        });
+                    b.ToTable("Actor", (string)null);
                 });
 
             modelBuilder.Entity("React_Net.Models.Comentario", b =>
@@ -120,30 +87,7 @@ namespace React_Net.Migrations
 
                     b.HasIndex("PeliculaId");
 
-                    b.ToTable("Comentarios");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Contenido = "Muy buena!!!",
-                            PeliculaId = 2,
-                            Recomendar = true
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Contenido = "Dura dura",
-                            PeliculaId = 2,
-                            Recomendar = true
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Contenido = "no debieron hacer eso...",
-                            PeliculaId = 3,
-                            Recomendar = false
-                        });
+                    b.ToTable("Comentario", (string)null);
                 });
 
             modelBuilder.Entity("React_Net.Models.Genero", b =>
@@ -164,7 +108,7 @@ namespace React_Net.Migrations
                     b.HasIndex("Nombre")
                         .IsUnique();
 
-                    b.ToTable("Generos");
+                    b.ToTable("Genero", (string)null);
                 });
 
             modelBuilder.Entity("React_Net.Models.Pelicula", b =>
@@ -188,30 +132,7 @@ namespace React_Net.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Peliculas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            EnCines = false,
-                            FechaEstreno = new DateTime(2019, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titulo = "Avengers Endgame"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EnCines = false,
-                            FechaEstreno = new DateTime(2021, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titulo = "Spider-Man: No Way Home"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            EnCines = false,
-                            FechaEstreno = new DateTime(2022, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titulo = "Spider-Man: Across the Spider-Verse (Part One)"
-                        });
+                    b.ToTable("Pelicula", (string)null);
                 });
 
             modelBuilder.Entity("React_Net.Models.Personaje", b =>
@@ -222,9 +143,6 @@ namespace React_Net.Migrations
                     b.Property<int>("ActorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ActorId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -233,18 +151,11 @@ namespace React_Net.Migrations
                     b.Property<int>("Orden")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PeliculaId1")
-                        .HasColumnType("int");
-
                     b.HasKey("PeliculaId", "ActorId");
 
                     b.HasIndex("ActorId");
 
-                    b.HasIndex("ActorId1");
-
-                    b.HasIndex("PeliculaId1");
-
-                    b.ToTable("Personajes");
+                    b.ToTable("Personaje", (string)null);
                 });
 
             modelBuilder.Entity("GeneroPelicula", b =>
@@ -276,24 +187,16 @@ namespace React_Net.Migrations
             modelBuilder.Entity("React_Net.Models.Personaje", b =>
                 {
                     b.HasOne("React_Net.Models.Actor", "Actor")
-                        .WithMany()
+                        .WithMany("Personajes")
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("React_Net.Models.Actor", null)
-                        .WithMany("Personajes")
-                        .HasForeignKey("ActorId1");
-
                     b.HasOne("React_Net.Models.Pelicula", "Pelicula")
-                        .WithMany()
+                        .WithMany("Personajes")
                         .HasForeignKey("PeliculaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("React_Net.Models.Pelicula", null)
-                        .WithMany("Personajes")
-                        .HasForeignKey("PeliculaId1");
 
                     b.Navigation("Actor");
 

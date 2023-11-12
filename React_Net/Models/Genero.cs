@@ -6,11 +6,14 @@ namespace React_Net.Models
 {
     public class Genero
     {
-        public Genero() { }
 
         public int Id { get; set; }
         public string Nombre { get; set; } = null!;
         public List<Pelicula> Peliculas { get; set; } = new List<Pelicula>();
+
+        public Genero() { }
+        public Genero(int id) { Id = id; }
+
     }
 
     public class GeneroCreacionDTO
@@ -27,6 +30,7 @@ namespace React_Net.Models
             //var animacion = new Genero { Id = 6, Nombre = "Animación" };
             //builder.HasData(cienciaFiccion, animacion);
 
+            builder.ToTable(nameof(Genero));
             builder.HasIndex(p => p.Nombre).IsUnique();
         }
     }

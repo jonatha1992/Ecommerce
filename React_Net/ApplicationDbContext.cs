@@ -23,14 +23,11 @@ namespace React_Net
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             configurationBuilder.Properties<string>().HaveMaxLength(150);
+
+
         }
 
-        //public DbSet<Genero> Generos => Set<Genero>();
-        //public DbSet<Actor> Actores => Set<Actor>();
-        //public DbSet<Pelicula> Peliculas => Set<Pelicula>();
-        //public DbSet<Comentario> Comentarios => Set<Comentario>();
-        //public DbSet<Personaje> Personajes => Set<Personaje>();
-
+ 
         public DbSet<Genero> Generos { get; set; }
         public DbSet<Actor> Actores { get; set; }
         public DbSet<Pelicula> Peliculas { get; set; }

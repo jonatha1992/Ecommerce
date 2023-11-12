@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using React_Net;
 
@@ -11,9 +12,11 @@ using React_Net;
 namespace React_Net.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231111205824_actores_peliculas")]
+    partial class actores_peliculas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,23 +38,6 @@ namespace React_Net.Migrations
                     b.HasIndex("PeliculasId");
 
                     b.ToTable("GeneroPelicula");
-
-                    b.HasData(
-                        new
-                        {
-                            GenerosId = 5,
-                            PeliculasId = 2
-                        },
-                        new
-                        {
-                            GenerosId = 5,
-                            PeliculasId = 3
-                        },
-                        new
-                        {
-                            GenerosId = 6,
-                            PeliculasId = 4
-                        });
                 });
 
             modelBuilder.Entity("React_Net.Models.Actor", b =>
@@ -118,29 +104,6 @@ namespace React_Net.Migrations
                     b.HasIndex("PeliculaId");
 
                     b.ToTable("Comentario", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Contenido = "Muy buena!!!",
-                            PeliculaId = 2,
-                            Recomendar = true
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Contenido = "Dura dura",
-                            PeliculaId = 2,
-                            Recomendar = true
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Contenido = "no debieron hacer eso...",
-                            PeliculaId = 3,
-                            Recomendar = false
-                        });
                 });
 
             modelBuilder.Entity("React_Net.Models.Genero", b =>
@@ -162,18 +125,6 @@ namespace React_Net.Migrations
                         .IsUnique();
 
                     b.ToTable("Genero", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 5,
-                            Nombre = "Ciencia Ficcion"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Nombre = "Animacion"
-                        });
                 });
 
             modelBuilder.Entity("React_Net.Models.Pelicula", b =>
@@ -225,10 +176,10 @@ namespace React_Net.Migrations
 
             modelBuilder.Entity("React_Net.Models.Personaje", b =>
                 {
-                    b.Property<int>("ActorId")
+                    b.Property<int>("PeliculaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PeliculaId")
+                    b.Property<int>("ActorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -239,34 +190,11 @@ namespace React_Net.Migrations
                     b.Property<int>("Orden")
                         .HasColumnType("int");
 
-                    b.HasKey("ActorId", "PeliculaId");
+                    b.HasKey("PeliculaId", "ActorId");
 
-                    b.HasIndex("PeliculaId");
+                    b.HasIndex("ActorId");
 
                     b.ToTable("Personaje", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ActorId = 2,
-                            PeliculaId = 3,
-                            Nombre = "Nick Fury",
-                            Orden = 1
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            PeliculaId = 2,
-                            Nombre = "Nick Fury",
-                            Orden = 2
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            PeliculaId = 2,
-                            Nombre = "Iron Man",
-                            Orden = 1
-                        });
                 });
 
             modelBuilder.Entity("GeneroPelicula", b =>

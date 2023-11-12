@@ -23,7 +23,8 @@ namespace AspNetCore.Controllers
             ComentarioCreacionDTO comentarioCreacionDTO)
         {
             var comentario = mapper.Map<Comentario>(comentarioCreacionDTO);
-            comentario.PeliculaId = peliculaId;
+            //comentario.Pelicula.Id = peliculaId;
+            comentario.Pelicula = new Pelicula(peliculaId);
             context.Add(comentario);
             await context.SaveChangesAsync();
             return Ok();

@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace React_Net.Migrations
 {
     /// <inheritdoc />
@@ -14,7 +12,7 @@ namespace React_Net.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Actores",
+                name: "Actor",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -25,11 +23,11 @@ namespace React_Net.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Actores", x => x.Id);
+                    table.PrimaryKey("PK_Actor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Generos",
+                name: "Genero",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -38,11 +36,11 @@ namespace React_Net.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Generos", x => x.Id);
+                    table.PrimaryKey("PK_Genero", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Peliculas",
+                name: "Pelicula",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -53,11 +51,11 @@ namespace React_Net.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Peliculas", x => x.Id);
+                    table.PrimaryKey("PK_Pelicula", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comentarios",
+                name: "Comentario",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -68,11 +66,11 @@ namespace React_Net.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comentarios", x => x.Id);
+                    table.PrimaryKey("PK_Comentario", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comentarios_Peliculas_PeliculaId",
+                        name: "FK_Comentario_Pelicula_PeliculaId",
                         column: x => x.PeliculaId,
-                        principalTable: "Peliculas",
+                        principalTable: "Pelicula",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -88,100 +86,55 @@ namespace React_Net.Migrations
                 {
                     table.PrimaryKey("PK_GeneroPelicula", x => new { x.GenerosId, x.PeliculasId });
                     table.ForeignKey(
-                        name: "FK_GeneroPelicula_Generos_GenerosId",
+                        name: "FK_GeneroPelicula_Genero_GenerosId",
                         column: x => x.GenerosId,
-                        principalTable: "Generos",
+                        principalTable: "Genero",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GeneroPelicula_Peliculas_PeliculasId",
+                        name: "FK_GeneroPelicula_Pelicula_PeliculasId",
                         column: x => x.PeliculasId,
-                        principalTable: "Peliculas",
+                        principalTable: "Pelicula",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Personajes",
+                name: "Personaje",
                 columns: table => new
                 {
                     PeliculaId = table.Column<int>(type: "int", nullable: false),
                     ActorId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Orden = table.Column<int>(type: "int", nullable: false),
-                    ActorId1 = table.Column<int>(type: "int", nullable: true),
-                    PeliculaId1 = table.Column<int>(type: "int", nullable: true)
+                    Orden = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Personajes", x => new { x.PeliculaId, x.ActorId });
+                    table.PrimaryKey("PK_Personaje", x => new { x.PeliculaId, x.ActorId });
                     table.ForeignKey(
-                        name: "FK_Personajes_Actores_ActorId",
+                        name: "FK_Personaje_Actor_ActorId",
                         column: x => x.ActorId,
-                        principalTable: "Actores",
+                        principalTable: "Actor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Personajes_Actores_ActorId1",
-                        column: x => x.ActorId1,
-                        principalTable: "Actores",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Personajes_Peliculas_PeliculaId",
+                        name: "FK_Personaje_Pelicula_PeliculaId",
                         column: x => x.PeliculaId,
-                        principalTable: "Peliculas",
+                        principalTable: "Pelicula",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Personajes_Peliculas_PeliculaId1",
-                        column: x => x.PeliculaId1,
-                        principalTable: "Peliculas",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.InsertData(
-                table: "Actores",
-                columns: new[] { "Id", "FechaNacimiento", "Fortuna", "Nombre" },
-                values: new object[,]
-                {
-                    { 2, new DateTime(1948, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 15000m, "Samuel L. Jackson" },
-                    { 3, new DateTime(1965, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 18000m, "Robert Downey Jr." }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Peliculas",
-                columns: new[] { "Id", "EnCines", "FechaEstreno", "Titulo" },
-                values: new object[,]
-                {
-                    { 2, false, new DateTime(2019, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "Avengers Endgame" },
-                    { 3, false, new DateTime(2021, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Spider-Man: No Way Home" },
-                    { 4, false, new DateTime(2022, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Spider-Man: Across the Spider-Verse (Part One)" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Comentarios",
-                columns: new[] { "Id", "Contenido", "PeliculaId", "Recomendar" },
-                values: new object[,]
-                {
-                    { 2, "Muy buena!!!", 2, true },
-                    { 3, "Dura dura", 2, true },
-                    { 4, "no debieron hacer eso...", 3, false }
-                });
-
-            migrationBuilder.InsertData(
-                table: "GeneroPelicula",
-                columns: new[] { "GenerosId", "PeliculasId" },
-                values: new object[,]
-                {
-                    { 5, 2 },
-                    { 5, 3 },
-                    { 6, 4 }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comentarios_PeliculaId",
-                table: "Comentarios",
+                name: "IX_Comentario_PeliculaId",
+                table: "Comentario",
                 column: "PeliculaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Genero_Nombre",
+                table: "Genero",
+                column: "Nombre",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_GeneroPelicula_PeliculasId",
@@ -189,47 +142,31 @@ namespace React_Net.Migrations
                 column: "PeliculasId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Generos_Nombre",
-                table: "Generos",
-                column: "Nombre",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Personajes_ActorId",
-                table: "Personajes",
+                name: "IX_Personaje_ActorId",
+                table: "Personaje",
                 column: "ActorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Personajes_ActorId1",
-                table: "Personajes",
-                column: "ActorId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Personajes_PeliculaId1",
-                table: "Personajes",
-                column: "PeliculaId1");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Comentarios");
+                name: "Comentario");
 
             migrationBuilder.DropTable(
                 name: "GeneroPelicula");
 
             migrationBuilder.DropTable(
-                name: "Personajes");
+                name: "Personaje");
 
             migrationBuilder.DropTable(
-                name: "Generos");
+                name: "Genero");
 
             migrationBuilder.DropTable(
-                name: "Actores");
+                name: "Actor");
 
             migrationBuilder.DropTable(
-                name: "Peliculas");
+                name: "Pelicula");
         }
     }
 }

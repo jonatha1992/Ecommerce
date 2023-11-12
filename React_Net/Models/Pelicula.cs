@@ -9,9 +9,12 @@ namespace React_Net.Models
         public string Titulo { get; set; } = null!;
         public bool EnCines { get; set; }
         public DateTime FechaEstreno { get; set; }
-        public HashSet<Comentario> Comentarios { get; set; } = new HashSet<Comentario>();
+        public List<Comentario> Comentarios { get; set; } = new List<Comentario>();
         public List<Genero> Generos { get; set; } = new List<Genero>();
         public List<Personaje> Personajes { get; set; } = new List<Personaje>();
+
+        public Pelicula() { }
+        public Pelicula(int ID) { Id = ID; }
     }
 
     public class PeliculaCreacionDTO
@@ -28,6 +31,7 @@ namespace React_Net.Models
     {
         public void Configure(EntityTypeBuilder<Pelicula> builder)
         {
+            builder.ToTable(nameof(Pelicula));
             builder.Property(a => a.FechaEstreno).HasColumnType("date");
         }
     }
