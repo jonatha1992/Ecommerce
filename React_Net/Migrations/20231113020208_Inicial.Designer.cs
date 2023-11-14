@@ -12,8 +12,8 @@ using React_Net;
 namespace React_Net.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231111163120_inicial")]
-    partial class inicial
+    [Migration("20231113020208_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,23 @@ namespace React_Net.Migrations
                     b.HasIndex("PeliculasId");
 
                     b.ToTable("GeneroPelicula");
+
+                    b.HasData(
+                        new
+                        {
+                            GenerosId = 5,
+                            PeliculasId = 2
+                        },
+                        new
+                        {
+                            GenerosId = 5,
+                            PeliculasId = 3
+                        },
+                        new
+                        {
+                            GenerosId = 6,
+                            PeliculasId = 4
+                        });
                 });
 
             modelBuilder.Entity("React_Net.Models.Actor", b =>
@@ -63,6 +80,22 @@ namespace React_Net.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Actor", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            FechaNacimiento = new DateTime(1948, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fortuna = 15000m,
+                            Nombre = "Samuel L. Jackson"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FechaNacimiento = new DateTime(1965, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Fortuna = 18000m,
+                            Nombre = "Robert Downey Jr."
+                        });
                 });
 
             modelBuilder.Entity("React_Net.Models.Comentario", b =>
@@ -88,6 +121,29 @@ namespace React_Net.Migrations
                     b.HasIndex("PeliculaId");
 
                     b.ToTable("Comentario", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            Contenido = "Muy buena!!!",
+                            PeliculaId = 2,
+                            Recomendar = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Contenido = "Dura dura",
+                            PeliculaId = 2,
+                            Recomendar = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Contenido = "no debieron hacer eso...",
+                            PeliculaId = 3,
+                            Recomendar = false
+                        });
                 });
 
             modelBuilder.Entity("React_Net.Models.Genero", b =>
@@ -109,6 +165,18 @@ namespace React_Net.Migrations
                         .IsUnique();
 
                     b.ToTable("Genero", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 5,
+                            Nombre = "Ciencia Ficcion"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Nombre = "Animacion"
+                        });
                 });
 
             modelBuilder.Entity("React_Net.Models.Pelicula", b =>
@@ -133,14 +201,37 @@ namespace React_Net.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pelicula", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            EnCines = false,
+                            FechaEstreno = new DateTime(2019, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Titulo = "Avengers Endgame"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EnCines = false,
+                            FechaEstreno = new DateTime(2021, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Titulo = "Spider-Man: No Way Home"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EnCines = false,
+                            FechaEstreno = new DateTime(2022, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Titulo = "Spider-Man: Across the Spider-Verse (Part One)"
+                        });
                 });
 
             modelBuilder.Entity("React_Net.Models.Personaje", b =>
                 {
-                    b.Property<int>("PeliculaId")
+                    b.Property<int>("ActorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ActorId")
+                    b.Property<int>("PeliculaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -151,11 +242,34 @@ namespace React_Net.Migrations
                     b.Property<int>("Orden")
                         .HasColumnType("int");
 
-                    b.HasKey("PeliculaId", "ActorId");
+                    b.HasKey("ActorId", "PeliculaId");
 
-                    b.HasIndex("ActorId");
+                    b.HasIndex("PeliculaId");
 
                     b.ToTable("Personaje", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ActorId = 2,
+                            PeliculaId = 3,
+                            Nombre = "Nick Fury",
+                            Orden = 1
+                        },
+                        new
+                        {
+                            ActorId = 2,
+                            PeliculaId = 2,
+                            Nombre = "Nick Fury",
+                            Orden = 2
+                        },
+                        new
+                        {
+                            ActorId = 3,
+                            PeliculaId = 2,
+                            Nombre = "Iron Man",
+                            Orden = 1
+                        });
                 });
 
             modelBuilder.Entity("GeneroPelicula", b =>

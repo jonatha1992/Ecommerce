@@ -11,11 +11,11 @@
     "React_Net": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "swagger",
+      //"launchUrl": "swagger",
       "applicationUrl": "http://localhost:5038",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-        //"ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }
     },
     "IIS Express": {

@@ -4,8 +4,6 @@ using Microsoft.Data.SqlClient;
 
 namespace React_Net.Models
 {
-
-   
     public class Comentario
     {
         public int Id { get; set; }
@@ -13,10 +11,10 @@ namespace React_Net.Models
         public bool Recomendar { get; set; 
         }
         public int PeliculaId { get; set; }
-        public Pelicula Pelicula { get; set; } 
+        public Pelicula? Pelicula { get; set; }  
 
-        public Comentario(int ID) { Id = ID; }
         public Comentario() {  }
+        public Comentario(int ID) { Id = ID;}
     }
 
     public class ComentarioCreacionDTO
