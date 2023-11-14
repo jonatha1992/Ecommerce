@@ -9,7 +9,7 @@ namespace React_Net.Models
         public string Titulo { get; set; } = null!;
         public bool EnCines { get; set; }
         public DateTime FechaEstreno { get; set; }
-        public List<Comentario> Comentarios { get; set; } = new List<Comentario>();
+        public HashSet<Comentario> Comentarios { get; set; } = new HashSet<Comentario>();
         public List<Genero> Generos { get; set; } = new List<Genero>();
         public List<Personaje> Personajes { get; set; } = new List<Personaje>();
 
